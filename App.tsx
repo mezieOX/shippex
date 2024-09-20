@@ -6,7 +6,7 @@ import {
   StatusBar,
   View,
 } from "react-native";
-import { Button, Input, Navbar } from "./components";
+import { Button, HeaderSection, Input, Navbar } from "./components";
 import { colors } from "./config";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -17,7 +17,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <Navbar />
       <View style={styles.welcome}>
-        <Text style={styles.welcomeMsg}>Hello,</Text>
+        <Text style={styles.title}>Hello,</Text>
         <Text style={styles.userName}>Ibrahim Shaker</Text>
       </View>
       <Input placeholder="Search" />
@@ -26,7 +26,7 @@ export default function App() {
           styling={{ width: "48%", backgroundColor: colors.gray }}
           textStyling={{ color: colors.boldGray }}
           title="Filters"
-          iconName="filter-outline"
+          iconName="filter-sharp"
           iconColor="#000"
           Icon={Ionicons}
         />
@@ -37,6 +37,7 @@ export default function App() {
           title="Add Scan"
         />
       </View>
+      <HeaderSection title={"Shipment"} />
     </SafeAreaView>
   );
 }
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   welcome: {
     paddingVertical: 20,
   },
-  welcomeMsg: {
+  title: {
     fontSize: 18,
   },
   userName: {
