@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
     flexDirection: "row", // Horizontal alignment
     alignItems: "center", // Align items vertically
     justifyContent: "space-between", // Space between items
-    padding: 10, // Optional padding for container
   },
   userImg: {
     height: 50, // User image size
