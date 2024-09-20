@@ -6,8 +6,11 @@ import {
   StatusBar,
   View,
 } from "react-native";
-import { Navbar } from "./components";
+import { Button, Input, Navbar } from "./components";
 import { colors } from "./config";
+
+import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 export default function App() {
   return (
@@ -16,6 +19,23 @@ export default function App() {
       <View style={styles.welcome}>
         <Text style={styles.welcomeMsg}>Hello,</Text>
         <Text style={styles.userName}>Ibrahim Shaker</Text>
+      </View>
+      <Input placeholder="Search" />
+      <View style={styles.filterAndAddScanSection}>
+        <Button
+          styling={{ width: "48%", backgroundColor: colors.gray }}
+          textStyling={{ color: colors.boldGray }}
+          title="Filters"
+          iconName="filter-outline"
+          iconColor="#000"
+          Icon={Ionicons}
+        />
+        <Button
+          Icon={MaterialCommunityIcons}
+          iconName="line-scan"
+          styling={{ width: "48%" }}
+          title="Add Scan"
+        />
       </View>
     </SafeAreaView>
   );
@@ -37,5 +57,10 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 24,
     fontWeight: "bold",
+  },
+  filterAndAddScanSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 24,
   },
 });
