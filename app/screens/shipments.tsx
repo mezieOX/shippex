@@ -6,7 +6,6 @@ import {
   Text,
   StatusBar,
   View,
-  ScrollView,
   FlatList,
   TouchableOpacity,
 } from "react-native";
@@ -42,25 +41,32 @@ export const ShipmentsScreen: React.FC = () => {
     IShipment[]
   >([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
 
-  // Filter shipments based on the selected filters
-  const handleSubmit = () => {
+  const fetchData = () => {
+    // Simulate fetching data, this can be an API call
     setLoading(true);
     setTimeout(() => {
-      const result = SHIPMENTS.filter(
-        (item) => filteredValues.includes(item.status) // Filter by shipment status
+      const result = SHIPMENTS.filter((item) =>
+        filteredValues.includes(item.status)
       );
       setFilteredListItemResult(result);
       setLoading(false);
     }, 2000);
   };
 
-  // Search and filter shipments based on the search text input
+  const handleRefresh = () => {
+    setRefreshing(true);
+    // Re-fetch data or reset filtered items
+    fetchData();
+    setRefreshing(false); // Stop refreshing after fetching data
+  };
+
   useEffect(() => {
     const result = SHIPMENTS.filter(
       (item) =>
         item.status.toLowerCase().includes(text.toLowerCase()) ||
-        item.title.toLowerCase().includes(text.toLowerCase()) // Filter by shipment status or title
+        item.title.toLowerCase().includes(text.toLowerCase())
     );
     setFilteredListItemResult(result);
   }, [text]);
@@ -72,7 +78,7 @@ export const ShipmentsScreen: React.FC = () => {
         <Text style={styles.title}>Hello,</Text>
         <Text style={styles.userName}>Ibrahim Shaker</Text>
       </View>
-      <Input placeholder="Search" text={text} setText={setText} />
+      <Input search placeholder="Search" text={text} setText={setText} />
       <View style={styles.filterAndAddScanSection}>
         <Button
           styling={{ width: "48%", backgroundColor: colors.gray }}
@@ -95,32 +101,23 @@ export const ShipmentsScreen: React.FC = () => {
         setChecked={setChecked}
         title="Shipments"
       />
-      <ScrollView>
-        {loading ? (
-          <View>
-            <Text>Loading...</Text>
-          </View>
-        ) : (
-          <FlatList
-            data={
-              filteredListItemResult?.length ? filteredListItemResult : SHIPMENTS
-            }
-            keyExtractor={(item) => item.id.toString()}
-            style={styles.list}
-            renderItem={({ item }) => (
-              <Cards
-                checked={checked}
-                setChecked={setChecked}
-                data={item as any}
-              />
-            )}
-            ItemSeparatorComponent={ListItemSeparator}
-          />
+      <FlatList
+        data={
+          filteredListItemResult.length ? filteredListItemResult : SHIPMENTS
+        }
+        keyExtractor={(item) => item.id.toString()}
+        style={styles.list}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
+        renderItem={({ item }) => (
+          <Cards checked={checked} setChecked={setChecked} data={item as any} />
         )}
-      </ScrollView>
+        ItemSeparatorComponent={ListItemSeparator}
+      />
       <ModalComp
+        showFilterTitle
         isVisible={openModal}
-        handleSubmit={handleSubmit}
+        handleSubmit={fetchData}
         onClose={() => setModalOpen(false)}
       >
         <View style={styles.filterContainer}>

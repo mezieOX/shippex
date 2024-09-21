@@ -65,3 +65,5 @@ const TabNavigator = () => (
     />
   </Tab.Navigator>
 );
+
+export default TabNavigator;

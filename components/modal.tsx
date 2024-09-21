@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
-
 import { colors } from "../config";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 
@@ -17,7 +16,7 @@ interface ModalCompProps {
   onClose: () => void;
   handleSubmit: () => void;
   showFilterTitle?: boolean;
-  modalContentProps?: boolean;
+  modalContentProps?: object;
 }
 
 export const ModalComp: React.FC<ModalCompProps> = ({
@@ -25,8 +24,8 @@ export const ModalComp: React.FC<ModalCompProps> = ({
   children,
   onClose,
   handleSubmit,
+  showFilterTitle = false,
   modalContentProps,
-  showFilterTitle,
 }) => {
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
@@ -94,20 +93,19 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     backgroundColor: "#00000078",
-    zIndex: 200,
     position: "absolute",
     bottom: 0,
     top: 0,
+    zIndex: 200,
   },
   modalLine: {
     height: 4,
     width: "100%",
-    flexDirection: "row",
-    justifyContent: "center",
-    borderRadius: 50,
     backgroundColor: colors.darkGray,
+    borderRadius: 50,
     position: "absolute",
     top: -14,
+    justifyContent: "center",
   },
   modalContent: {
     height: "40%",

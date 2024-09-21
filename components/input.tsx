@@ -15,10 +15,10 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 interface IInput {
   styling?: ViewStyle | ViewStyle[];
   placeholder?: string;
-  text: string;
+  text?: string;
   setText: (text: string) => void;
   search?: boolean;
-  secureTextEntry: boolean;
+  secureTextEntry?: boolean;
 }
 
 export const Input: React.FC<IInput> = ({
