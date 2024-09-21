@@ -34,7 +34,7 @@ interface IShipment {
 }
 
 export const ShipmentsScreen: React.FC = () => {
-  const [checked, setChecked] = useState<boolean>(true);
+  const [checked, setChecked] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
   const [openModal, setModalOpen] = useState<boolean>(false);
   const [filteredValues, setFilteredValues] = useState<string[]>([]);
@@ -103,7 +103,7 @@ export const ShipmentsScreen: React.FC = () => {
         ) : (
           <FlatList
             data={
-              filteredListItemResult.length ? filteredListItemResult : SHIPMENTS
+              filteredListItemResult?.length ? filteredListItemResult : SHIPMENTS
             }
             keyExtractor={(item) => item.id.toString()}
             style={styles.list}

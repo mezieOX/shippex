@@ -1,12 +1,13 @@
 import React from "react";
 import { Pressable, StyleSheet } from "react-native";
+
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../config";
 
 interface ICheckbox {
   checked: boolean;
   onChange: (value: boolean) => void;
-  buttonStyle?: object; // Define the optional prop for custom styles
+  buttonStyle?: object;
 }
 
 export const MyCheckbox: React.FC<ICheckbox> = ({
@@ -18,8 +19,8 @@ export const MyCheckbox: React.FC<ICheckbox> = ({
     <Pressable
       style={[
         styles.checkboxBase,
-        checked ? styles.checkboxChecked : null, // Apply checked style conditionally
-        buttonStyle, // Allow custom button styles to be applied last
+        checked ? styles.checkboxChecked : null,
+        buttonStyle,
       ]}
       onPress={() => onChange(!checked)}
     >

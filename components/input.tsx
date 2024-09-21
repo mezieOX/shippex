@@ -2,19 +2,23 @@ import React, { useState, useRef, useEffect } from "react";
 import {
   Animated,
   StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
   ViewStyle,
 } from "react-native";
+
+import { colors } from "../config";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { colors } from "../config";
 
 interface IInput {
   styling?: ViewStyle | ViewStyle[];
   placeholder?: string;
   text: string;
   setText: (text: string) => void;
+  search?: boolean;
+  secureTextEntry: boolean;
 }
 
 export const Input: React.FC<IInput> = ({
@@ -22,6 +26,8 @@ export const Input: React.FC<IInput> = ({
   placeholder,
   text,
   setText,
+  search,
+  secureTextEntry,
 }) => {
   const [focus, setFocus] = useState(false);
   const borderWidthAnim = useRef(new Animated.Value(0)).current;
@@ -38,11 +44,16 @@ export const Input: React.FC<IInput> = ({
     <Animated.View
       style={[styles.container, { borderWidth: borderWidthAnim }, styling]}
     >
-      <Feather
-        name="search"
-        size={24}
-        color={focus ? colors.primary : colors.darkGray}
-      />
+      {text?.length > 0 && !search ? (
+        <Text style={styles.label}>{placeholder}</Text>
+      ) : null}
+      {search ? (
+        <Feather
+          name="search"
+          size={24}
+          color={focus ? colors.primary : colors.darkGray}
+        />
+      ) : null}
       <TextInput
         style={styles.input}
         placeholder={placeholder}
@@ -51,9 +62,10 @@ export const Input: React.FC<IInput> = ({
         cursorColor={colors.primary}
         placeholderTextColor={colors.darkGray}
         onFocus={() => setFocus(true)}
+        secureTextEntry={secureTextEntry}
         onBlur={() => setFocus(false)}
       />
-      {focus && text.length > 0 && (
+      {focus && text?.length > 0 && (
         <TouchableOpacity onPress={() => setText("")}>
           <MaterialIcons name="clear" size={24} color={colors.primary} />
         </TouchableOpacity>
@@ -71,6 +83,12 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     borderRadius: 8,
     height: 50,
+  },
+  label: {
+    paddingHorizontal: 8,
+    paddingTop: 8,
+    color: colors.black,
+    fontWeight: "300",
   },
   input: {
     flex: 1,
