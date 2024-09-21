@@ -3,40 +3,40 @@ import {
   Animated,
   StyleSheet,
   TextInput,
-  Touchable,
   TouchableOpacity,
   ViewStyle,
 } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
-import { colors } from "../config";
-
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { colors } from "../config";
 
 interface IInput {
   styling?: ViewStyle | ViewStyle[];
   placeholder?: string;
+  text: string;
+  setText: (text: string) => void;
 }
 
-export const Input: React.FC<IInput> = ({ styling, placeholder }) => {
+export const Input: React.FC<IInput> = ({
+  styling,
+  placeholder,
+  text,
+  setText,
+}) => {
   const [focus, setFocus] = useState(false);
-  const borderWidthAnim = useRef(new Animated.Value(0)).current; // Animated value for border width
+  const borderWidthAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    // Animate the border width when focus changes
     Animated.timing(borderWidthAnim, {
-      toValue: focus ? 1 : 0, // Animate to 1 when focused, 0 when blurred
-      duration: 300, // Animation duration
-      useNativeDriver: false, // We are animating style props, so native driver is not needed
+      toValue: focus ? 1 : 0,
+      duration: 300,
+      useNativeDriver: false,
     }).start();
   }, [focus]);
 
   return (
-    <Animated.View // Use Animated.View for animating styles
-      style={[
-        styles.container,
-        { borderWidth: borderWidthAnim }, // Bind animated borderWidth value
-        styling,
-      ]}
+    <Animated.View
+      style={[styles.container, { borderWidth: borderWidthAnim }, styling]}
     >
       <Feather
         name="search"
@@ -46,16 +46,18 @@ export const Input: React.FC<IInput> = ({ styling, placeholder }) => {
       <TextInput
         style={styles.input}
         placeholder={placeholder}
+        value={text}
+        onChangeText={setText}
         cursorColor={colors.primary}
         placeholderTextColor={colors.darkGray}
         onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)} // Revert border change when blurred
+        onBlur={() => setFocus(false)}
       />
-      {focus ? (
-        <TouchableOpacity>
+      {focus && text.length > 0 && (
+        <TouchableOpacity onPress={() => setText("")}>
           <MaterialIcons name="clear" size={24} color={colors.primary} />
         </TouchableOpacity>
-      ) : null}
+      )}
     </Animated.View>
   );
 };
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 12,
     backgroundColor: colors.gray,
-    borderColor: colors.primary, // Border color remains constant
+    borderColor: colors.primary,
     borderRadius: 8,
     height: 50,
   },
