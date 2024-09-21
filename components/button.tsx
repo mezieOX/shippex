@@ -6,6 +6,7 @@ import {
   ViewStyle,
   TextStyle,
 } from "react-native";
+
 import { colors } from "../config";
 
 // Define prop types using more specific types for styles and icons
