@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { MyCheckbox } from "./checkbox";
 import { colors } from "../config";
@@ -6,11 +6,15 @@ import { colors } from "../config";
 // Define the prop types for better type safety
 interface HeaderSectionProps {
   title: string;
+  checked: boolean;
+  setChecked: () => void;
 }
 
-export const HeaderSection: React.FC<HeaderSectionProps> = ({ title }) => {
-  const [checked, setChecked] = useState(false);
-
+export const HeaderSection: React.FC<HeaderSectionProps> = ({
+  title,
+  checked,
+  setChecked,
+}) => {
   const handleCheckboxChange = () => {
     setChecked((prev) => !prev);
   };
