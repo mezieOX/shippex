@@ -4,8 +4,9 @@ export const colors = {
   mediumBlue: "#6E91EC",
   transparent: "transparent",
   white: "#fff",
-  black: "#000",
+  black: "#000000",
   gray: "#F4F2F8",
+  lighterGray: "#EAE7F2",
   lightGray: "#D0D5DD",
   boldGray: "#58536E",
   darkGray: "#A7A3B3",
@@ -14,5 +15,5 @@ export const colors = {
   lightWarning: "#FEE3D4",
   warning: "#D12030",
   lightGreen: "#E3FAD6",
-  green: "E3FAD6",
+  green: "#208D28",
 };

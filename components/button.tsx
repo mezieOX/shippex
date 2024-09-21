@@ -17,6 +17,7 @@ interface IButton {
   textStyling?: TextStyle | TextStyle[];
   Icon?: React.ComponentType<any>; // Icon component type
   iconName?: string;
+  onPress?: any;
 }
 
 export const Button: React.FC<IButton> = ({
@@ -27,9 +28,10 @@ export const Button: React.FC<IButton> = ({
   textStyling,
   Icon,
   iconName,
+  onPress,
 }) => {
   return (
-    <TouchableOpacity style={[styles.button, styling]}>
+    <TouchableOpacity onPress={onPress} style={[styles.button, styling]}>
       {Icon && iconName && (
         <Icon name={iconName} size={iconSize} color={iconColor} />
       )}

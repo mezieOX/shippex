@@ -90,21 +90,21 @@ export const Cards: React.FC<ICardData> = ({ data, checked, setChecked }) => {
             color:
               data.status === "Received"
                 ? colors.primary
-                : data.status === "on hold"
+                : data.status === "On Hold"
                 ? colors.yellow
-                : data.status === "error"
+                : data.status === "Error"
                 ? colors.warning
-                : data.status === "delivered"
+                : data.status === "Delivered"
                 ? colors.green
                 : colors.black,
             backgroundColor:
               data.status === "Received"
                 ? colors.lightBlue
-                : data.status === "on hold"
+                : data.status === "On Hold"
                 ? colors.lightYellow
-                : data.status === "error"
+                : data.status === "Error"
                 ? colors.lightWarning
-                : data.status === "delivered"
+                : data.status === "Delivered"
                 ? colors.lightGreen
                 : colors.transparent,
           },
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     gap: 12,
     borderRadius: 8,
     backgroundColor: colors.gray,
-    paddingHorizontal: 20,
+    paddingHorizontal: 14,
     minHeight: 80,
   },
   image: {

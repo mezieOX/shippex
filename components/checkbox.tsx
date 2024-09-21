@@ -24,7 +24,7 @@ export const MyCheckbox: React.FC<ICheckbox> = ({
       onPress={() => onChange(!checked)}
     >
       {checked && (
-        <Ionicons name="checkmark-sharp" size={18} color={colors.primary} />
+        <Ionicons name="checkmark-sharp" size={15} color={colors.primary} />
       )}
     </Pressable>
   );
@@ -32,8 +32,8 @@ export const MyCheckbox: React.FC<ICheckbox> = ({
 
 const styles = StyleSheet.create({
   checkboxBase: {
-    width: 23,
-    height: 23,
+    width: 20,
+    height: 20,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 4,
