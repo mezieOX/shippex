@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { colors } from "../../../config";
-import { Button, Input, ModalComp } from "../../../components";
+import { Button, ErrorMessage, Input, ModalComp } from "../../../components";
+import * as Yup from "yup";
+import { Formik } from "formik";
 
-export const LoginScreen = ({ navigation }) => {
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required().label("Email/Username"),
+  url: Yup.string().required().label("Url"),
+  password: Yup.string().required().min(4).label("Password"),
+});
+
+interface LoginScreenProps {
+  navigation: {
+    navigate: (screen: string) => void;
+  };
+}
+
+export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   const [openModal, setModalOpen] = useState<boolean>(false);
-  const [userInput, setUserInput] = useState({
-    url: "",
-    email: "",
-    password: "",
-  });
 
   return (
     <>
@@ -21,7 +30,7 @@ export const LoginScreen = ({ navigation }) => {
         />
         <Button
           title="Login"
-          onPress={() => setModalOpen((prev) => !prev)}
+          onPress={() => setModalOpen(true)}
           styling={{
             backgroundColor: colors.white,
             borderRadius: 8,
@@ -32,6 +41,7 @@ export const LoginScreen = ({ navigation }) => {
         />
       </View>
       <ModalComp
+        handleSubmit={() => {}}
         isVisible={openModal}
         onClose={() => setModalOpen(false)}
         modalContentProps={{ height: "95%" }}
@@ -42,80 +52,69 @@ export const LoginScreen = ({ navigation }) => {
             Please enter your First, Last name and your phone number in order to
             register
           </Text>
-          <View style={styles.inputWrapper}>
-            <Input
-              placeholder="Email"
-              text={`${userInput.url}`}
-              setText={(text) =>
-                setUserInput((props) => ({
-                  ...props,
-                  url: text,
-                }))
-              }
-              styling={{
-                flexDirection: "column",
-                alignItems: "flex-start",
-                height: 60,
-                paddingBottom: userInput?.url.length ? 8 : 0,
-              }}
-            />
-            <Input
-              placeholder="Username / Email"
-              text={userInput.email}
-              setText={(text) =>
-                setUserInput((props) => ({
-                  ...props,
-                  email: text,
-                }))
-              }
-              styling={{
-                flexDirection: "column",
-                alignItems: "flex-start",
-                height: 60,
-                paddingBottom: userInput?.email.length ? 8 : 0,
-              }}
-            />
-            <Input
-              placeholder="Password"
-              setText={(text) =>
-                setUserInput((props) => ({
-                  ...props,
-                  password: text,
-                }))
-              }
-              secureTextEntry
-              styling={{
-                flexDirection: "column",
-                alignItems: "flex-start",
-                height: 60,
-                paddingBottom: userInput?.password.length ? 8 : 0,
-              }}
-            />
-          </View>
-          <View
-            style={{
-              position: "absolute",
-              bottom: 40,
-              width: "100%",
-              marginHorizontal: 12,
+          <Formik
+            initialValues={{ url: "", email: "", password: "" }}
+            onSubmit={(values) => {
+              navigation.navigate("Main");
             }}
+            validationSchema={validationSchema}
           >
-            <Button
-              title="Login"
-              onPress={() => navigation.navigate("Shipments")}
-              styling={{
-                backgroundColor: userInput.url.length
-                  ? colors.primary
-                  : colors.lighterGray,
-                borderRadius: 8,
-                bottom: 0,
-              }}
-              textStyling={{
-                color: userInput.url.length ? colors.white : colors.darkGray,
-                fontWeight: "bold",
-              }}
-            />
-          </View>
+            {({ handleChange, handleSubmit, errors, values }) => (
+              <>
+                <View style={styles.inputWrapper}>
+                  <Input
+                    placeholder="Url"
+                    setText={handleChange("url")}
+                    styling={{
+                      height: 60,
+                      paddingBottom: values.url ? 8 : 0,
+                    }}
+                  />
+                  <ErrorMessage error={errors.url} />
+                  <Input
+                    placeholder="Username / Email"
+                    setText={handleChange("email")}
+                    styling={{
+                      height: 60,
+                      paddingBottom: values.email ? 8 : 0,
+                    }}
+                  />
+                  <ErrorMessage error={errors.email} />
+                  <Input
+                    placeholder="Password"
+                    setText={handleChange("password")}
+                    secureTextEntry
+                    styling={{
+                      height: 60,
+                      paddingBottom: values.password ? 8 : 0,
+                    }}
+                  />
+                  <ErrorMessage error={errors.password} />
+                </View>
+                <View style={styles.buttonContainer}>
+                  <Button
+                    title="Login"
+                    onPress={handleSubmit}
+                    styling={{
+                      backgroundColor:
+                        errors.email || errors.password || !values.url.length
+                          ? colors.lightGray
+                          : colors.primary,
+                      borderRadius: 8,
+                      marginHorizontal: 12,
+                    }}
+                    textStyling={{
+                      color:
+                        errors.email || errors.password || !values.url.length
+                          ? colors.darkGray
+                          : colors.white,
+                      fontWeight: "bold",
+                    }}
+                  />
+                </View>
+              </>
+            )}
+          </Formik>
         </View>
       </ModalComp>
     </>
@@ -152,5 +151,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 20,
     marginVertical: 40,
+  },
+  buttonContainer: {
+    position: "absolute",
+    bottom: 40,
+    width: "100%",
   },
 });
