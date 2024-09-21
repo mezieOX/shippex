@@ -1,5 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Animated,
+} from "react-native";
 import { MyCheckbox } from "./checkbox";
 import { colors } from "../config";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -21,15 +28,31 @@ interface ICardData {
 export const Cards: React.FC<ICardData> = ({ data, checked, setChecked }) => {
   const [ticked, setTicked] = useState<boolean>(false);
   const [finalChecked, setFinalChecked] = useState(checked || ticked);
+  const animation = useRef(new Animated.Value(0)).current; // Animated value for scaling
 
   // Update finalChecked whenever checked or ticked changes
   useEffect(() => {
     setFinalChecked(ticked || checked);
   }, [checked, ticked]);
 
+  // Handle animation when finalChecked changes
+  useEffect(() => {
+    Animated.timing(animation, {
+      toValue: finalChecked ? 1 : 0,
+      duration: 300, // Duration of the animation
+      useNativeDriver: true, // Use native driver for better performance
+    }).start();
+  }, [finalChecked]);
+
   const handleTickedChange = () => {
     setTicked((prev) => !prev);
   };
+
+  // Interpolating the scale
+  const scale = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 1.2], // Scale from 1 to 1.2
+  });
 
   return (
     <View style={styles.container}>
@@ -90,24 +113,26 @@ export const Cards: React.FC<ICardData> = ({ data, checked, setChecked }) => {
         {data.status}
       </Text>
 
-      {/* Icon button */}
-      <TouchableOpacity
-        style={[
-          styles.icon,
-          {
-            backgroundColor: finalChecked ? colors.mediumBlue : colors.white,
-            borderWidth: finalChecked ? 2 : 0,
-            padding: finalChecked ? 4 : 6,
-            borderColor: finalChecked ? colors.lightBlue : colors.white,
-          },
-        ]}
-      >
-        <AntDesign
-          name="arrowsalt"
-          size={16}
-          color={finalChecked ? colors.white : colors.primary}
-        />
-      </TouchableOpacity>
+      {/* Icon button with animation */}
+      <Animated.View style={{ transform: [{ scale }] }}>
+        <TouchableOpacity
+          style={[
+            styles.icon,
+            {
+              backgroundColor: finalChecked ? colors.mediumBlue : colors.white,
+              borderWidth: finalChecked ? 2 : 0,
+              padding: finalChecked ? 4 : 6,
+              borderColor: finalChecked ? colors.lightBlue : colors.white,
+            },
+          ]}
+        >
+          <AntDesign
+            name="arrowsalt"
+            size={16}
+            color={finalChecked ? colors.white : colors.primary}
+          />
+        </TouchableOpacity>
+      </Animated.View>
     </View>
   );
 };

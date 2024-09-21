@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     gap: 10,
     backgroundColor: colors.primary,
     borderRadius: 12,
-    padding: 15,
+    padding: 12,
     width: "100%",
   },
   text: {

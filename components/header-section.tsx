@@ -7,7 +7,7 @@ import { colors } from "../config";
 interface HeaderSectionProps {
   title: string;
   checked: boolean;
-  setChecked: () => void;
+  setChecked: (value: boolean) => void; // Accepts a boolean parameter
 }
 
 export const HeaderSection: React.FC<HeaderSectionProps> = ({
@@ -16,7 +16,7 @@ export const HeaderSection: React.FC<HeaderSectionProps> = ({
   setChecked,
 }) => {
   const handleCheckboxChange = () => {
-    setChecked((prev) => !prev);
+    setChecked(!checked); // Toggle the checked state
   };
 
   return (
