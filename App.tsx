@@ -5,14 +5,27 @@ import {
   Text,
   StatusBar,
   View,
+  ScrollView,
+  FlatList,
 } from "react-native";
-import { Button, HeaderSection, Input, Navbar } from "./components";
+import {
+  Button,
+  Cards,
+  HeaderSection,
+  Input,
+  ListItemSeparator,
+  Navbar,
+} from "./components";
 import { colors } from "./config";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { shipments } from "./data";
+import { useState } from "react";
 
 export default function App() {
+  const [checked, setChecked] = useState(true);
+
   return (
     <SafeAreaView style={styles.container}>
       <Navbar />
@@ -37,7 +50,22 @@ export default function App() {
           title="Add Scan"
         />
       </View>
-      <HeaderSection title={"Shipment"} />
+      <HeaderSection
+        checked={checked}
+        setChecked={setChecked}
+        title={"Shipments"}
+      />
+      <ScrollView>
+        <FlatList
+          data={shipments}
+          keyExtractor={(data) => data.id.toString()}
+          style={styles.list}
+          renderItem={({ item }) => (
+            <Cards checked={checked} setChecked={setChecked} data={item} />
+          )}
+          ItemSeparatorComponent={ListItemSeparator}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -64,4 +92,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingVertical: 24,
   },
+  list: {},
 });

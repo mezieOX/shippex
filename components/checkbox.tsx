@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 2,
     borderColor: colors.lightGray,
-    backgroundColor: "transparent",
+    backgroundColor: "white",
   },
   checkboxChecked: {
     backgroundColor: colors.lightBlue,
