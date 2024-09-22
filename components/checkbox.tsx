@@ -33,8 +33,8 @@ export const MyCheckbox: React.FC<ICheckbox> = ({
 
 const styles = StyleSheet.create({
   checkboxBase: {
-    width: 20,
-    height: 20,
+    width: 18,
+    height: 18,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 4,

@@ -153,7 +153,7 @@ export const Cards: React.FC<ICardData> = ({ data, checked }) => {
           >
             <AntDesign
               name="arrowsalt"
-              size={16}
+              size={14}
               color={finalChecked ? colors.white : colors.primary}
             />
           </TouchableOpacity>
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 12,
+    gap: 10,
     borderRadius: 8,
     backgroundColor: colors.gray,
     paddingHorizontal: 14,
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 10,
+    gap: 6,
   },
   trackingNumber: {
     fontSize: 17,
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     borderWidth: 1,
     borderColor: colors.white,
-    fontSize: 14,
+    fontSize: 12,
     padding: 6,
     borderRadius: 6,
   },
