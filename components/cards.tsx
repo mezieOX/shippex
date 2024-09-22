@@ -188,12 +188,14 @@ export const Cards: React.FC<ICardData> = ({ data, checked }) => {
             iconColor={colors.white}
             iconName="call"
             styling={{
-              width: "30%",
+              width: "25%",
               backgroundColor: colors.mediumBlue,
               paddingVertical: 9,
+              gap: 5,
               borderRadius: 8,
             }}
             iconSize={20}
+            textStyling={{ fontSize: 14 }}
             Icon={MaterialIcons}
           />
           <Button
@@ -201,12 +203,13 @@ export const Cards: React.FC<ICardData> = ({ data, checked }) => {
             iconColor={colors.white}
             iconName="whatsapp"
             styling={{
-              width: "44%",
+              width: "42%",
               backgroundColor: colors.darkGreen,
               paddingVertical: 9,
               borderRadius: 8,
             }}
             iconSize={20}
+            textStyling={{ fontSize: 14 }}
             Icon={FontAwesome}
           />
         </View>
