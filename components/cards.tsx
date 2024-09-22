@@ -228,8 +228,8 @@ const styles = StyleSheet.create({
     minHeight: 80,
   },
   image: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
   },
   fromTo: {
     flexDirection: "row",
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   trackingNumber: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "bold",
   },
   status: {

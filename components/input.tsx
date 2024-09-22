@@ -65,7 +65,7 @@ export const Input: React.FC<IInput> = ({
         secureTextEntry={secureTextEntry}
         onBlur={() => setFocus(false)}
       />
-      {focus && text?.length > 0 && (
+      {focus && text?.length > 0 && search && (
         <TouchableOpacity onPress={() => setText("")}>
           <MaterialIcons name="clear" size={24} color={colors.primary} />
         </TouchableOpacity>

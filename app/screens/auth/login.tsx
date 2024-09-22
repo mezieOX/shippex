@@ -63,28 +63,37 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
               <>
                 <View style={styles.inputWrapper}>
                   <Input
+                    text={values.url}
                     placeholder="Url"
                     setText={handleChange("url")}
                     styling={{
+                      flexDirection: "column",
+                      alignItems: "start",
                       height: 60,
                       paddingBottom: values.url ? 8 : 0,
                     }}
                   />
                   <ErrorMessage error={errors.url} />
                   <Input
+                    text={values.email}
                     placeholder="Username / Email"
                     setText={handleChange("email")}
                     styling={{
+                      flexDirection: "column",
+                      alignItems: "start",
                       height: 60,
                       paddingBottom: values.email ? 8 : 0,
                     }}
                   />
                   <ErrorMessage error={errors.email} />
                   <Input
+                    text={values.password}
                     placeholder="Password"
                     setText={handleChange("password")}
                     secureTextEntry
                     styling={{
+                      flexDirection: "column",
+                      alignItems: "start",
                       height: 60,
                       paddingBottom: values.password ? 8 : 0,
                     }}
@@ -143,7 +152,7 @@ const styles = StyleSheet.create({
     color: colors.black,
   },
   description: {
-    paddingVertical: 16,
+    paddingTop: 16,
     color: colors.darkerGray,
     fontSize: 16,
   },
