@@ -245,6 +245,7 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     borderWidth: 1,
     borderColor: colors.white,
+    fontSize: 14,
     padding: 6,
     borderRadius: 6,
   },
@@ -277,7 +278,7 @@ const styles = StyleSheet.create({
   name: {
     color: colors.black,
     fontWeight: "500",
-    fontSize: 18,
+    fontSize: 16,
   },
   address: {
     color: colors.black,
