@@ -25,7 +25,7 @@ export const MyCheckbox: React.FC<ICheckbox> = ({
       onPress={() => onChange(!checked)}
     >
       {checked && (
-        <Ionicons name="checkmark-sharp" size={15} color={colors.primary} />
+        <Ionicons name="checkmark-sharp" size={13} color={colors.primary} />
       )}
     </Pressable>
   );
