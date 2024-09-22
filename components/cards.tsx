@@ -153,7 +153,7 @@ export const Cards: React.FC<ICardData> = ({ data, checked }) => {
           >
             <AntDesign
               name="arrowsalt"
-              size={16}
+              size={14}
               color={finalChecked ? colors.white : colors.primary}
             />
           </TouchableOpacity>
@@ -188,12 +188,14 @@ export const Cards: React.FC<ICardData> = ({ data, checked }) => {
             iconColor={colors.white}
             iconName="call"
             styling={{
-              width: "30%",
+              width: "25%",
               backgroundColor: colors.mediumBlue,
               paddingVertical: 9,
+              gap: 5,
               borderRadius: 8,
             }}
             iconSize={20}
+            textStyling={{ fontSize: 14 }}
             Icon={MaterialIcons}
           />
           <Button
@@ -201,12 +203,13 @@ export const Cards: React.FC<ICardData> = ({ data, checked }) => {
             iconColor={colors.white}
             iconName="whatsapp"
             styling={{
-              width: "40%",
+              width: "42%",
               backgroundColor: colors.darkGreen,
               paddingVertical: 9,
               borderRadius: 8,
             }}
             iconSize={20}
+            textStyling={{ fontSize: 14 }}
             Icon={FontAwesome}
           />
         </View>
@@ -221,30 +224,31 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 12,
+    gap: 10,
     borderRadius: 8,
     backgroundColor: colors.gray,
     paddingHorizontal: 14,
     minHeight: 80,
   },
   image: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
   },
   fromTo: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 10,
+    gap: 6,
   },
   trackingNumber: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "bold",
   },
   status: {
     textTransform: "uppercase",
     borderWidth: 1,
     borderColor: colors.white,
+    fontSize: 12,
     padding: 6,
     borderRadius: 6,
   },
@@ -277,7 +281,7 @@ const styles = StyleSheet.create({
   name: {
     color: colors.black,
     fontWeight: "500",
-    fontSize: 18,
+    fontSize: 14,
   },
   address: {
     color: colors.black,
