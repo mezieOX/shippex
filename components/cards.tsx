@@ -201,7 +201,7 @@ export const Cards: React.FC<ICardData> = ({ data, checked }) => {
             iconColor={colors.white}
             iconName="whatsapp"
             styling={{
-              width: "40%",
+              width: "44%",
               backgroundColor: colors.darkGreen,
               paddingVertical: 9,
               borderRadius: 8,
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
   name: {
     color: colors.black,
     fontWeight: "500",
-    fontSize: 16,
+    fontSize: 14,
   },
   address: {
     color: colors.black,
