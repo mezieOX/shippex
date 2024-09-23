@@ -24,7 +24,7 @@ interface IInput {
 export const Input: React.FC<IInput> = ({
   styling,
   placeholder,
-  text,
+  text = "",
   setText,
   search,
   secureTextEntry,

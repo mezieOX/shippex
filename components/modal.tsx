@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Animated,
 } from "react-native";
+
 import { colors } from "../config";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 

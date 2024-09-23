@@ -10,6 +10,7 @@ import {
   UIManager,
   Platform,
 } from "react-native";
+
 import { MyCheckbox } from "./checkbox";
 import { colors } from "../config";
 import AntDesign from "@expo/vector-icons/AntDesign";
