@@ -2,14 +2,8 @@ import React, { useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { colors } from "../../../config";
 import { Button, ErrorMessage, Input, ModalComp } from "../../../components";
-import * as Yup from "yup";
 import { Formik } from "formik";
-
-const validationSchema = Yup.object().shape({
-  email: Yup.string().required().label("Email/Username"),
-  url: Yup.string().required().label("Url"),
-  password: Yup.string().required().min(4).label("Password"),
-});
+import { validationSchema } from "./login-validation";
 
 interface LoginScreenProps {
   navigation: {
@@ -68,7 +62,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                     setText={handleChange("url")}
                     styling={{
                       flexDirection: "column",
-                      alignItems: "start",
+                      alignItems: "flex-start",
                       height: 60,
                       paddingBottom: values.url ? 8 : 0,
                     }}
@@ -80,7 +74,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                     setText={handleChange("email")}
                     styling={{
                       flexDirection: "column",
-                      alignItems: "start",
+                      alignItems: "flex-start",
                       height: 60,
                       paddingBottom: values.email ? 8 : 0,
                     }}
@@ -93,7 +87,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                     secureTextEntry
                     styling={{
                       flexDirection: "column",
-                      alignItems: "start",
+                      alignItems: "flex-start",
                       height: 60,
                       paddingBottom: values.password ? 8 : 0,
                     }}
