@@ -23,7 +23,7 @@ cd shippex
 
 Install Dependencies
 
-Use yarn (or npm install if you prefer npm):
+Use yarn
 bash
 Copy code
 yarn install
