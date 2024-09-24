@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ViewStyle,
   TextStyle,
+  ActivityIndicator,
 } from "react-native";
 
 import { colors } from "../config";
@@ -18,7 +19,8 @@ interface IButton {
   textStyling?: TextStyle | TextStyle[];
   Icon?: React.ComponentType<any>; // Icon component type
   iconName?: string;
-  onPress?: any;
+  onPress?: () => void;
+  loading?: boolean;
 }
 
 export const Button: React.FC<IButton> = ({
@@ -30,13 +32,20 @@ export const Button: React.FC<IButton> = ({
   Icon,
   iconName,
   onPress,
+  loading,
 }) => {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.button, styling]}>
-      {Icon && iconName && (
-        <Icon name={iconName} size={iconSize} color={iconColor} />
+      {loading ? (
+        <ActivityIndicator size={"small"} color={colors.white} />
+      ) : (
+        <>
+          {Icon && iconName && (
+            <Icon name={iconName} size={iconSize} color={iconColor} />
+          )}
+          <Text style={[styles.text, textStyling]}>{title}</Text>
+        </>
       )}
-      <Text style={[styles.text, textStyling]}>{title}</Text>
     </TouchableOpacity>
   );
 };

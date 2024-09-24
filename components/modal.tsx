@@ -40,7 +40,7 @@ export const ModalComp: React.FC<ModalCompProps> = ({
                 </Text>
               </TouchableOpacity>
               <View>
-                <View style={styles.modalLine} />
+                <View style={[styles.modalLine, { height: 3 }]} />
                 <Text style={styles.title}>Filters</Text>
               </View>
               <TouchableOpacity
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     zIndex: 200,
   },
   modalLine: {
-    height: 4,
+    height: 6,
     width: "100%",
     backgroundColor: colors.darkGray,
     borderRadius: 50,

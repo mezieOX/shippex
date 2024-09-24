@@ -13,6 +13,7 @@ interface LoginScreenProps {
 
 export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   const [openModal, setModalOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   return (
     <>
@@ -49,7 +50,11 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
           <Formik
             initialValues={{ url: "", email: "", password: "" }}
             onSubmit={(values) => {
-              navigation.navigate("Main");
+              setLoading(true);
+              setTimeout(() => {
+                navigation.navigate("Main");
+                setLoading(false);
+              }, 1000);
             }}
             validationSchema={validationSchema}
           >
@@ -58,7 +63,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                 <View style={styles.inputWrapper}>
                   <Input
                     text={values.url}
-                    placeholder="Url"
+                    placeholder="URL"
                     setText={handleChange("url")}
                     styling={{
                       flexDirection: "column",
@@ -98,6 +103,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
                   <Button
                     title="Login"
                     onPress={handleSubmit}
+                    loading={loading}
                     styling={{
                       backgroundColor:
                         errors.email || errors.password || !values.url.length
