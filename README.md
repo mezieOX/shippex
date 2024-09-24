@@ -9,8 +9,7 @@ Simple folder structure for easy understanding and scalability
 Prerequisites
 Before running this project, make sure you have the following installed:
 
-Node.js (>= 12.x)
-Yarn or npm
+Yarn
 Watchman (for macOS users, install using brew install watchman)
 Android Studio (for Android development)
 Xcode (for iOS development, macOS only)
